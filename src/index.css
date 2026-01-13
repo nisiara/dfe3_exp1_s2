@@ -17,8 +17,6 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -37,6 +35,7 @@ main {
 .formulario {
   background: white;
   width: 100%;
+  min-height: 600px;
   height: 100%;
   border-radius: 18px;
   display: flex;
@@ -147,4 +146,61 @@ main {
   color: #FFF;
   font-weight: 500;
   font-size: 10px;
+}
+
+section{
+  height: 50vh;
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+}
+
+@media screen and (min-width: 600px) {
+  section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  section {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+section > div{
+
+  border: 1px solid #CECECE;
+  padding: 16px;
+  border-radius: 8px;
+  min-height: 100px;
+
+}
+section small{
+  font-size: 65%;
+  text-transform: uppercase;
+  display: block;
+}
+section b {
+  text-transform: uppercase;
+  display: block;
+  font-size: 16px;
+}
+
+.logout{
+  display: block;
+  margin: auto;
+  height: 48px;
+  padding: 4px 16px;
+  border-radius: 8px;
+  border: 0;
+  background: #064150;
+  text-transform: uppercase;
+  color: #FFF;
+  font-weight: 500;
+  font-size: 10px;
+  cursor: pointer;
 }
