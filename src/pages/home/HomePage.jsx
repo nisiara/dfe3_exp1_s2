@@ -36,6 +36,7 @@ const HomePage = () => {
 
   return (
     <>
+    
       <section>
         <div><small>ID usuario: </small><b>{userData.id}</b></div>
         <div><small>Email: </small><b>{userData.email}</b></div>
