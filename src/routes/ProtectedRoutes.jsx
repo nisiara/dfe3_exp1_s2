@@ -1,10 +1,12 @@
+import { useContext } from "react";
 import { Navigate, Outlet } from "react-router";
+import { AuthenticationContext } from "../contexts/AuthenticationContext";
 
 const ProtectedRoutes = () => {
-  const token = localStorage.getItem("token");
-  
-  if (!token) {
-    return <Navigate to="/register" replace />;
+  const authContext = useContext(AuthenticationContext);
+
+  if (!authContext.token) {
+    return <Navigate to="/login" replace />;
   }
 
   return <Outlet />;

@@ -13,7 +13,7 @@ Plataforma que simula una página web de viajes exclusivos para probar autentica
 - **Frontend**: React 18 + Vite
 - **Enrutamiento**: React Router
 - **Estilos**: CSS personalizado
-- **API**: ReqRes
+
 
 ## 📁 Estructura del Proyecto
 

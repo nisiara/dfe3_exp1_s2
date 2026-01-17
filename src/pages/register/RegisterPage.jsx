@@ -42,7 +42,6 @@ const RegisterPage = () => {
     };
     setFormValues(datosIngresados);
 
-    // 2. Lógica de validación
     let isValidField = false;
 
     if (name === "confirmPassword") {
@@ -51,17 +50,11 @@ const RegisterPage = () => {
       isValidField = validationPatterns[name].test(value);
     }
 
-    // 3. Actualizar estado de validación
     setValidationInput(prevValidation => {
       const updatedValidation = {
         ...prevValidation,
         [name]: isValidField
       };
-
-      // Si el usuario cambia el "password", debemos re-validar "confirmPassword" automáticamente
-      /* if (name === "password") {
-        updatedValidation.confirmPassword = datosIngresados.confirmPassword === value && validationPatterns.password.test(value);
-      } */
 
       return updatedValidation;
     });
@@ -105,8 +98,8 @@ const RegisterPage = () => {
   };
 
   return (
-    <main>
-      <form className="formulario" onSubmit={handleOnSubmit}>
+    <main className="img-bg img-bg--formulario">
+      <form className="formulario formulario--registro" onSubmit={handleOnSubmit}>
         <div className="formulario__imagen">
           <h3>Tu próxima aventura te espera</h3>
           <p>
@@ -119,7 +112,6 @@ const RegisterPage = () => {
         <div className="formulario__contenido">
           <h3 className="formulario__titulo">Regístrate</h3>
          
-          
           <div className="formulario__contenedor-input">
             <label>Nombre</label>
             <input 
@@ -176,24 +168,15 @@ const RegisterPage = () => {
               value={formValues.confirmPassword} 
               onChange={handleOnChange} 
             />
-            {formValues.confirmPassword && !validationInput.confirmPassword && (
-              <small style={{color: 'red'}}>Las contraseñas no coinciden o no cumplen el formato.</small>
-            )}
+           
           </div>
           
           <div className="formulario__contenedor-accion">
             <button type="submit" disabled={!isFormValid || loading}>
-              {loading ? "Enviando..." : "Enviar código"}
+              {loading ? "Enviando datos..." : "Registrarme"}
             </button>
           </div>
-          
-          {error && (
-            <div className="formulario__contenedor-mensaje formulario__contenedor-mensaje--error">
-              <small><b>Error:</b> {error}</small>
-            </div>
-          )}
-          
-          
+          {error && <div className="formulario__mensaje formulario__mensaje--error"><small>{error}</small></div>  }
         </div>
       </form>
     </main>

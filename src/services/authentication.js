@@ -1,19 +1,16 @@
-const BASE_URL = 'https://reqres.in/api';
-const API_KEY = "pub_36a0e5d6b0c9d86dc8d2bb498dcc0f0f0a66a9cabf9869a2e64f7ce8c6750bf6";
-const PROJECT_ID = '1566';
+const BASE_URL = "http://localhost:3001/api";
 
-export const loginUser = async (mail) => {
+export const loginUser = async (email, password) => {
   try {
     const response = await fetch(
-      `${BASE_URL}/app-users/login`, {
+      `${BASE_URL}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': API_KEY
         },
         body: JSON.stringify({
-          email: mail,
-          project_id: PROJECT_ID
+          email,
+          password
         })
       }
     );

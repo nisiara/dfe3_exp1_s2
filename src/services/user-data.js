@@ -1,6 +1,6 @@
-const BASE_URL = "https://reqres.in/api";
+const BASE_URL = "http://localhost:3001/api";
 
-export const apiClient = async (endpoint) => {
+export const userData = async (endpoint) => {
   const token = localStorage.getItem("token");
 
   const response = await fetch(`${BASE_URL}${endpoint}`, {

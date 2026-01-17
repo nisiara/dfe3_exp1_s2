@@ -1,26 +1,50 @@
-import { useState, useRef } from "react";
-import { verification } from "../../services/verification";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
+import { AuthenticationContext } from "../../contexts/AuthenticationContext.jsx"
+import { loginUser } from "../../services/authentication";
 
 const LoginPage = () => {
+  const authContext = useContext(AuthenticationContext);
+
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const codeInputRef = useRef(null);
+  const [inputValues, setValidationInput] = useState({
+    email: '',
+    password: ''
+  });
+
+  function handleOnChange(event){
+    const { name, value } = event.target;
+
+    const datosIngresados = {
+      ...inputValues,
+      [name]: value
+    };
+    setValidationInput(datosIngresados);
+  }
+
 
    const handleOnSubmit = async (event) => {
       event.preventDefault();
+      setError("");
+      
+      if (!inputValues.email || !inputValues.password) {
+        setError("Por favor completa todos los campos");
+        return;
+      }
+      
       setLoading(true);
       try {
-        const code = codeInputRef.current.value;
-        //setLoading(true);
-        const response = await verification(code);
+        const response = await loginUser(inputValues.email, inputValues.password);
         console.log("Lo que devuelve:", response);
-        
-        localStorage.setItem('token', response.data.session_token);
-        navigate("/dashboard");
+
+        authContext.setToken(response.data.token);
+        localStorage.setItem('token', response.data.token);
+        authContext.setUserData(response.data);
+        navigate("/home");
         
       } 
       catch (err) {
@@ -32,26 +56,30 @@ const LoginPage = () => {
     };
 
   return (
-    <main>
-      <form className="formulario" onSubmit={handleOnSubmit}>
+    <main className="img-bg img-bg--formulario">
+      <form className="formulario formulario--login" onSubmit={handleOnSubmit} noValidate>
         <div className="formulario__imagen">
           <h3>Estás a solo un paso</h3>
-          <p>Registrate y accede a descuentos exclusivos, planea el viaje de tus sueños, ya sea en las montañas, playas, o en pueblo tranquilo 
-            <b> tu viaje comienza aquí</b>
+          <p>Siendo usuario de nuestra platagorma tienes un mundo de ventajas por descubrir.
+            <b> Tu viaje comienza con nosotros.</b>
           </p>
         </div>
         <div className="formulario__contenido">
-          <h3 className="formulario__titulo">Ingresa la clave</h3>
-          <p className="formulario__bajada">Revisa tu correo electrónico e ingresa el código recibido</p>
+          <h3 className="formulario__titulo">Ingresa a <br /> nuestra plataforma</h3>
+          <p className="formulario__bajada">Siempre tendrás los mejores destinos y ofertas</p>
           <div className="formulario__contenedor-input">
-            <label>Ingresa el código</label>
-            <input ref={codeInputRef} />
+            <label>correo electrónico</label>
+            <input type="email" value={inputValues.email} onChange={handleOnChange} name="email" />
+          </div>
+          <div className="formulario__contenedor-input">
+            <label>contraseña</label>
+            <input type="password"  value={inputValues.password} onChange={handleOnChange} name="password" />
           </div>
           
           <div className="formulario__contenedor-accion">
-            <button disabled={loading}>{loading ? "Verificando..." : "Verificar código"}</button>
+            <button disabled={loading}>{loading ? "Iniciando sesión" : "Iniciar sesión"}</button>
           </div>
-          {/* {{error}} */}
+          {error && <div className="formulario__mensaje formulario__mensaje--error"><small>{error}</small></div>  }
         </div>
       </form>
     </main>
