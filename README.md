@@ -1,4 +1,4 @@
-# Aplicación Autententicación - DFE3 Exp1 S1
+# Aplicación Autententicación - DFE3 Exp1 S2
 Plataforma que simula una página web de viajes exclusivos para probar autenticación de usuario.
 
 ## 🎯 Características
@@ -46,8 +46,8 @@ src/
 
 1. **Clonar el repositorio**
 ```bash
-git clone https://github.com/nisiara/dfe3_exp1_s1.git
-cd dfe3_exp1_s1
+git clone https://github.com/nisiara/dfe3_exp1_s2.git
+cd dfe3_exp1_s2
 ```
 
 2. **Instalar dependencias**

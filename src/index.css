@@ -77,12 +77,13 @@ main {
 
 .formulario__contenido {
   flex: 1 2 45%;
-  padding: 100px 50px;
+  padding: 20px 50px;
   display: flex;
   flex-direction: column;
 }
 
 .formulario__titulo{
+  margin-bottom: 16px;
   text-transform: uppercase;
   font-size: 18px;
   font-weight: 800;
@@ -97,8 +98,9 @@ main {
   font-size: 14px;
   color: #5e5e5e;
 }
-.formulario__contenedor-input{
-  margin-top: auto;
+.formulario__contenedor-input + .formulario__contenedor-input{
+  margin-top: 10px;
+  
 }
 
 .formulario__contenedor-input label{
@@ -115,6 +117,13 @@ main {
   padding: 6px 24px;
   border-radius: 6px;
   border: 1px solid #a5a5a5;
+}
+.formulario__contenedor-input ul {
+  margin-top: 8px;
+  list-style-position: inside;
+}
+.formulario__contenedor-input li{
+  font-size: 10px;
 }
 .formulario__contenedor-mensaje{
   padding-top: 10px;
@@ -146,6 +155,12 @@ main {
   color: #FFF;
   font-weight: 500;
   font-size: 10px;
+}
+.formulario__contenedor-accion button:disabled {
+  border: 0;
+  background: #b5b5b5;
+  color: #FFF;
+  cursor: not-allowed;
 }
 
 section{
