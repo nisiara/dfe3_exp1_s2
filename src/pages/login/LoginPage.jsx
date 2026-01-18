@@ -27,33 +27,33 @@ const LoginPage = () => {
   }
 
 
-   const handleOnSubmit = async (event) => {
-      event.preventDefault();
-      setError("");
-      
-      if (!inputValues.email || !inputValues.password) {
-        setError("Por favor completa todos los campos");
-        return;
-      }
-      
-      setLoading(true);
-      try {
-        const response = await loginUser(inputValues.email, inputValues.password);
-        console.log("Lo que devuelve:", response);
+  async function handleOnSubmit(event){
+    event.preventDefault();
+    setError("");
+    
+    if (!inputValues.email || !inputValues.password) {
+      setError("Por favor completa todos los campos");
+      return;
+    }
+    
+    setLoading(true);
+    try {
+      const response = await loginUser(inputValues.email, inputValues.password);
+      console.log("Lo que devuelve:", response);
 
-        authContext.setToken(response.data.token);
-        localStorage.setItem('token', response.data.token);
-        authContext.setUserData(response.data);
-        navigate("/home");
-        
-      } 
-      catch (err) {
-        setError(err.message || "Error con el codigo");
-      } 
-      finally {
-        setLoading(false);
-      }
-    };
+      authContext.setToken(response.data.token);
+      localStorage.setItem('token', response.data.token);
+      authContext.setUserData(response.data);
+      navigate("/home");
+      
+    } 
+    catch (err) {
+      setError(err.message || "Error con el codigo");
+    } 
+    finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <main className="img-bg img-bg--formulario">

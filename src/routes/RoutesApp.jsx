@@ -1,7 +1,7 @@
-import React, { Suspense, useState} from "react"
+import React, { Suspense} from "react"
 import { Routes, Route, Navigate } from "react-router"
 import ProtectedRoutes from "./ProtectedRoutes.jsx"
-import { AuthenticationContext } from "../contexts/AuthenticationContext.jsx"
+import { AuthenticationProvider } from "../contexts/AuthenticationContext.jsx"
 
 const Register = React.lazy( () => import('../pages/register/RegisterPage'))
 const Login = React.lazy( () => import('../pages/login/LoginPage.jsx'))
@@ -10,11 +10,8 @@ const NotFound = React.lazy( () => import("../pages/not-found/NotFoundPage.jsx")
 
 const RoutesApp = () => {
   
-  const [userData, setUserData] = useState({})
-  const [token, setToken] = useState(null)
-
   return (
-    <AuthenticationContext.Provider value={{ userData, setUserData, token, setToken }}>
+    <AuthenticationProvider>
       <Suspense>
         <Routes>
           <Route path="/" element={<Navigate to="/register" />} />
@@ -28,7 +25,7 @@ const RoutesApp = () => {
           <Route path="*" element={<NotFound/>} />
         </Routes>
       </Suspense>
-     </AuthenticationContext.Provider>
+     </AuthenticationProvider>
   )
 }
  
